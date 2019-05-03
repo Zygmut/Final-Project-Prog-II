@@ -1,7 +1,7 @@
 /*
  * Clase principal del programa
  */
-package pkgfinal.project.progii;
+package finalproject;
 
 import javax.swing.JFrame;
 
