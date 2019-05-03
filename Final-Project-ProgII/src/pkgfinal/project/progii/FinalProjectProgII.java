@@ -4,7 +4,6 @@
 package pkgfinal.project.progii;
 
 import javax.swing.JFrame;
-import javax.swing.Timer;
 
 /**
  *
