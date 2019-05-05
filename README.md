@@ -31,7 +31,7 @@ círculos. Además se han de definir las siguientes clases:
     colección de círculos y los datos provenientes de la interfaz gráfica. Entre otros contiene el método que pone en
     marcha la simulación y el paintComponent responsable de la visualización. El método que hace la
     simulación del movimiento es un bucle infinito donde para todos los círculos de la colección es calcula la
-    su nueva posición y su interacción con límites del panel ( "paredes"), estas dos operaciones
+    su nueva posición y su interacción con límites del panel ("paredes"), estas dos operaciones
     dependen de lo que haya configurado en la interfaz gráfica. Después de cada iteración hay programado un retraso
     para que la visualización sea adecuada. En Java se puede programar un retraso con la sentencia:
     Thread.sleep (10); donde el parámetro indica los milisegundos de espera.
@@ -79,9 +79,12 @@ entregar en el Aula Digital un fichero comprimido (se recomienda la compresión 
 
     a) Portada con el título de la práctica, el nombre del autor o autores, el nombre de la asignatura y el
     profesor.
+    
     b) Introducción que sintetice el enunciado de la práctica.
+    
     c) Diseño. Donde se describa el diseño descendente que ha conducido a la solución propuesta.
     Explicando las clases y métodos.
+    
     d) Conclusiones. Que sinteticen la experiencia obtenida, describan las lecciones aprendidas y
     resalten los puntos que han resultado difíciles de resolver.
 
