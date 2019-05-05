@@ -24,7 +24,7 @@ public class Ball extends JPanel {
 
     public Ball(Double x, Double y, Integer dim) {
         pos = new Vector(x, y);
-        vel = new Vector(0.32, 0.50);
+        vel = new Vector(0.13, 0.00);
         ac = new Vector(0.00, 0.00);
         this.dim = dim;
         col = rndColor();

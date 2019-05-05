@@ -13,23 +13,23 @@ import finalproject.UserExceptions.*;
  */
 public class Vector {
 
-    private Double[] x;
+    public Double[] vector;
 
     public Vector(Integer dim) {
-        this.x = new Double[dim];
+        this.vector = new Double[dim];
     }
 
     public Vector(Double x, Double y) {
-        this.x = new Double[2];
-        this.x[0] = x;
-        this.x[1] = y;
+        this.vector = new Double[2];
+        this.vector[0] = x;
+        this.vector[1] = y;
     }
 
     public Vector(Double x, Double y, Double z) {
-        this.x = new Double[3];
-        this.x[0] = x;
-        this.x[1] = y;
-        this.x[2] = z;
+        this.vector = new Double[3];
+        this.vector[0] = x;
+        this.vector[1] = y;
+        this.vector[2] = z;
     }
 
     /**
@@ -38,14 +38,14 @@ public class Vector {
      * @return Dimension
      */
     public Integer getDim() {
-        return x.length;
+        return vector.length;
     }
 
     @Override
     public String toString() {
         String s = "(";
-        for (int i = 0; i < x.length; i++) {
-            s += x[i] + " ";
+        for (int i = 0; i < vector.length; i++) {
+            s += vector[i] + " ";
         }
         return s + ")";
     }
@@ -55,10 +55,10 @@ public class Vector {
      *
      * @return Modulo
      */
-    public Double mod() {
+    public Double module() {
         Double sum = 0.00;
-        for (int i = 0; i < x.length; i++) {
-            sum += x[i] * x[i];
+        for (int i = 0; i < vector.length; i++) {
+            sum += vector[i] * vector[i];
         }
         return Math.sqrt(sum);
     }
@@ -69,51 +69,27 @@ public class Vector {
      * @param y
      * @return
      */
-    public static Double mod(Vector y) {
+    public static Double module(Vector y) {
         Double sum = 0.00;
         for (int i = 0; i < y.getDim(); i++) {
-            sum += y.getValue(i) * y.getValue(i);
+            sum += y.vector[i] * y.vector[i];
         }
         return Math.sqrt(sum);
-    }
-
-    /**
-     * Asigna el valor val a la posicion pos
-     *
-     * @param pos
-     * @param val
-     */
-    public void setValue(Integer pos, Double val) {
-        this.x[pos] = val;
-    }
-
-    /**
-     * Permite conocer el valor de un vector sabiendo su posicion
-     *
-     * @param pos
-     * @return Valor
-     */
-    public Double getValue(Integer pos) {
-        return x[pos];
     }
 
     /**
      * Permite sumar dos vectores
      *
      * @param y
-     * @return z
      * @throws finalproject.UserExceptions.DiferentDimensionException
      */
-    public Vector AddVector(Vector y) throws DiferentDimensionException {
-        Vector z;
-        if (!(this.x.length == y.getDim())) {
+    public void AddVector(Vector y) throws DiferentDimensionException {
+        if (!(this.vector.length == y.getDim())) {
             throw new DiferentDimensionException();
         }
-        z = new Vector(x.length);
-        for (int i = 0; i < x.length; i++) {
-            z.setValue(i, (x[i] + y.getValue(i)));
+        for (int i = 0; i < vector.length; i++) {
+            vector[i] += y.vector[i];
         }
-        return z;
     }
 
     /**
@@ -131,7 +107,7 @@ public class Vector {
         }
         z = new Vector(x.getDim());
         for (int i = 0; i < x.getDim(); i++) {
-            z.setValue(i, (x.getValue(i) + y.getValue(i)));
+            z.vector[i] = x.vector[i] + y.vector[i];
         }
         return z;
     }
@@ -140,19 +116,16 @@ public class Vector {
      * Permite restar dos vectores
      *
      * @param y
-     * @return z
      * @throws finalproject.UserExceptions.DiferentDimensionException
      */
-    public Vector SubVector(Vector y) throws DiferentDimensionException {
-        Vector z;
-        if (!(this.x.length == y.getDim())) {
+    public void SubVector(Vector y) throws DiferentDimensionException {
+
+        if (!(this.vector.length == y.getDim())) {
             throw new DiferentDimensionException();
         }
-        z = new Vector(x.length);
-        for (int i = 0; i < x.length; i++) {
-            z.setValue(i, (x[i] - y.getValue(i)));
+        for (int i = 0; i < vector.length; i++) {
+            vector[i] -= y.vector[i];
         }
-        return z;
     }
 
     /**
@@ -170,7 +143,7 @@ public class Vector {
         }
         z = new Vector(x.getDim());
         for (int i = 0; i < x.getDim(); i++) {
-            z.setValue(i, (x.getValue(i) - y.getValue(i)));
+            z.vector[i] = x.vector[i] - y.vector[i];
         }
         return z;
     }
@@ -179,14 +152,11 @@ public class Vector {
      * Permite multiplicar un vector por un valor
      *
      * @param y
-     * @return z
      */
-    public Vector EMultVector(Double y) {
-        Vector z = new Vector(x.length);
-        for (int i = 0; i < x.length; i++) {
-            z.setValue(i, (y * x[i]));
+    public void EMultVector(Double y) {
+        for (int i = 0; i < vector.length; i++) {
+            vector[i] *= y;
         }
-        return z;
     }
 
     /**
@@ -199,7 +169,7 @@ public class Vector {
     public static Vector EMult(Vector x, Double y) {
         Vector z = new Vector(x.getDim());
         for (int i = 0; i < 10; i++) {
-            z.setValue(i, (y * x.getValue(i)));
+            z.vector[i] = x.vector[i] * y;
         }
         return z;
     }
@@ -208,14 +178,11 @@ public class Vector {
      * Permite dividir un vector por un valor
      *
      * @param y
-     * @return z
      */
-    public Vector EDivVector(Double y) {
-        Vector z = new Vector(x.length);
-        for (int i = 0; i < x.length; i++) {
-            z.setValue(i, (y / x[i]));
+    public void EDivVector(Double y) {
+        for (int i = 0; i < vector.length; i++) {
+            vector[i] /= y;
         }
-        return z;
     }
 
     /**
@@ -228,7 +195,7 @@ public class Vector {
     public static Vector EDiv(Vector x, Double y) {
         Vector z = new Vector(x.getDim());
         for (int i = 0; i < 10; i++) {
-            z.setValue(i, (y / x.getValue(i)));
+            z.vector[i] = x.vector[i] / y;
         }
         return z;
     }
@@ -239,10 +206,10 @@ public class Vector {
      * @return z
      */
     public Vector Uni() {
-        Vector z = new Vector(x.length);
-        Double mod = mod();
-        for (int i = 0; i < 10; i++) {
-            z.setValue(i, (x[i] / mod));
+        Vector z = new Vector(vector.length);
+        Double mod = module();
+        for (int i = 0; i < vector.length; i++) {
+            z.vector[i] = vector[i] / mod;
         }
         return z;
     }
@@ -255,9 +222,9 @@ public class Vector {
      */
     public static Vector Uni(Vector y) {
         Vector z = new Vector(y.getDim());
-        Double mod = Vector.mod(y);
+        Double mod = Vector.module(y);
         for (int i = 0; i < 10; i++) {
-            z.setValue(i, (y.getValue(i) / mod));
+            z.vector[i] = y.vector[i] / mod;
         }
         return z;
     }
@@ -272,11 +239,11 @@ public class Vector {
      */
     public Double EscVector(Vector y) throws DiferentDimensionException {
         Double sum = 0.00;
-        if (!(x.length == y.getDim())) {
+        if (!(vector.length == y.getDim())) {
             throw new DiferentDimensionException();
         }
-        for (int i = 0; i < x.length; i++) {
-            sum += x[i] * y.getValue(i);
+        for (int i = 0; i < vector.length; i++) {
+            sum += vector[i] * y.vector[i];
         }
         return sum;
     }
@@ -295,73 +262,8 @@ public class Vector {
             throw new DiferentDimensionException();
         }
         for (int i = 0; i < x.getDim(); i++) {
-            sum += x.getValue(i) * y.getValue(i);
+            sum += x.vector[i] * y.vector[i];
         }
         return sum;
-    }
-
-    /**
-     * Devuevle la componente x de un vector
-     *
-     * @return x
-     */
-    public Double getX() {
-        return x[0];
-    }
-
-    /**
-     * Devuevle la componente y del vector
-     *
-     * @return y
-     */
-    public Double getY() {
-        return x[1];
-    }
-
-    /**
-     * Devuelve la componente z del vector
-     *
-     * @return z
-     * @throws finalproject.UserExceptions.SingleDiferentDimensionException
-     */
-    public Double getZ() throws SingleDiferentDimensionException {
-        if (!(x.length == 3)) {
-            throw new SingleDiferentDimensionException();
-        }
-        return x[2];
-    }
-
-    /**
-     * Devuevle la componente x de un vector pasado por parametro
-     *
-     * @param x
-     * @return x
-     */
-    public Double getX(Vector x) {
-        return x.getValue(0);
-    }
-
-    /**
-     * Devuevle la componente y del vector pasado por parametro
-     *
-     * @param x
-     * @return y
-     */
-    public static Double getY(Vector x) {
-        return x.getValue(1);
-    }
-
-    /**
-     * Devuelve la componente z del vector pasado por parametro,
-     *
-     * @param x
-     * @return z
-     * @throws finalproject.UserExceptions.SingleDiferentDimensionException
-     */
-    public static Double getZ(Vector x) throws SingleDiferentDimensionException {
-        if (!(x.getDim() == 3)) {
-            throw new SingleDiferentDimensionException();
-        }
-        return x.getValue(2);
     }
 }
