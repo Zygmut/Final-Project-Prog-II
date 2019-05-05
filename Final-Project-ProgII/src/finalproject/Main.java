@@ -9,18 +9,18 @@ import javax.swing.JFrame;
  *
  * @author Zygmut
  */
-public class FinalProjectProgII extends JFrame {
+public class Main extends JFrame {
 
     Panel panel;
-    public Integer Width = 600;
-    public Integer Height = 400;
+    public static Integer Width = 600;
+    public static Integer Height = 400;
 
-    public FinalProjectProgII() {
+    public Main() {
 
         this.setTitle("Final Project");
         this.setSize(Width, Height);
         this.setResizable(false);
-        this.setDefaultCloseOperation(FinalProjectProgII.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(Main.EXIT_ON_CLOSE);
 
         panel = new Panel();
         this.getContentPane().add(panel);
@@ -31,7 +31,7 @@ public class FinalProjectProgII extends JFrame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new FinalProjectProgII().setVisible(true);
+        new Main().setVisible(true);
     }
 
 }

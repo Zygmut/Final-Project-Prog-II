@@ -16,18 +16,16 @@ import javax.swing.JPanel;
  */
 public class Ball extends JPanel {
 
-    public double x;
-    public double y;
+    public Vector pos;
+    public Vector vel;
+    public Vector ac;
     public Integer dim;
     public Color col;
-    public double xvel = 0;
-    public double yvel = 0;
-    public double xac = 0;
-    public double yac = 0.01;
 
-    public Ball(Integer x, Integer y, Integer dim) {
-        this.x = x;
-        this.y = y;
+    public Ball(Double x, Double y, Integer dim) {
+        pos = new Vector(x, y);
+        vel = new Vector(0.32, 0.50);
+        ac = new Vector(0.00, 0.00);
         this.dim = dim;
         col = rndColor();
     }
