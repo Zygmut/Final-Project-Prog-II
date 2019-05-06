@@ -11,7 +11,7 @@ diferenciadas dos partes: por un lado un panel donde se ven los círculos en mov
 interfaz gráfica con un campo de texto editable que permite insertar el número de círculos de la simulación y
 dos cajas de verificación que permiten activar / desactivar la colisión de los círculos con los límites del
 panel y el tipo de movimiento a visualizar que puede ser de seguimiento del ratón o de caída. Ver Fig. 1.
-Ver vídeo https://youtu.be/BSyYRUXbWz
+Ver vídeo https://youtu.be/BSyYRUXbWz8
 
 
 ![figure 1](https://i.ibb.co/bgwTtgZ/figure-1.png)
