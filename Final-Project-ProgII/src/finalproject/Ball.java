@@ -19,14 +19,13 @@ public class Ball extends JPanel {
     public Vector pos;
     public Vector vel;
     public Vector ac;
-    public Integer dim;
+    public static Integer rad = 45; //45
     public Color col;
 
-    public Ball(Double x, Double y, Integer dim) {
+    public Ball(Double x, Double y) {
         pos = new Vector(x, y);
-        vel = new Vector(0.13, 0.00);
+        vel = new Vector(0.00, 0.00);
         ac = new Vector(0.00, 0.00);
-        this.dim = dim;
         col = rndColor();
     }
 

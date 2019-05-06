@@ -12,8 +12,8 @@ import javax.swing.JFrame;
 public class Main extends JFrame {
 
     Panel panel;
-    public static Integer Width = 600;
-    public static Integer Height = 400;
+    public static Integer Width = 1920;
+    public static Integer Height = 800;
 
     public Main() {
 

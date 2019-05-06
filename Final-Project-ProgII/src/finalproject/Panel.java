@@ -6,14 +6,16 @@
 package finalproject;
 
 import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.awt.PointerInfo;
 import java.awt.geom.Ellipse2D;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -21,21 +23,35 @@ import javax.swing.JPanel;
  */
 public class Panel extends JPanel {
 
-    Ball ball = new Ball((double) Main.Width / 2, 0.00, 150);
-    Vector G = new Vector(0.00, 0.00005); //0.00005 es tipo luna 
-    Vector Terminal = new Vector(0.50, 0.50);
-    Boolean mode = false;
+    static Vector G = new Vector(0.00, 0.002); //0.00005 es tipo luna 0.00198 tierra se puede modificar
+    Vector Terminal = new Vector(0.9, 0.9);
+    Integer length = 250;
+    ArrayList<Ball> balls = new ArrayList<>();
+    Boolean mouseMode = false;
+    Boolean wallMode = false;
 
     @Override
     protected void paintComponent(Graphics g) {
+        Double xpos, ypos;
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        Ellipse2D circle = new Ellipse2D.Double(ball.pos.vector[0], ball.pos.vector[1], ball.dim, ball.dim);
-        g2d.setStroke(new BasicStroke(ball.dim / 5));
-        g2d.draw(circle);
-        g2d.setColor(ball.col);
+        if (balls.size() < length) {
+            for (int i = 0; i < length; i++) {
+                xpos = (double) Math.random() * (Main.Width - (2 * Ball.rad) - 1); //45 = Ball.rad
+                ypos = (double) Math.random() * (Main.Height - (2 * Ball.rad) - 21); //-20 top margin 
+                Ball aux = new Ball(xpos, ypos);
+                balls.add(aux);
+            }
+        }
+        for (int i = 0; i < balls.size(); i++) {
+            Ellipse2D circle = new Ellipse2D.Double(balls.get(i).pos.vector[0], balls.get(i).pos.vector[1], Ball.rad, Ball.rad);
+            g2d.setColor(new Color(50, 50, 50)); //sin stroke
+            g2d.setStroke(new BasicStroke(Ball.rad / 7));
+            g2d.draw(circle);
+            g2d.setColor(balls.get(i).col);
 
-        g2d.fill(circle);
+            g2d.fill(circle);
+        }
 
         update(g);
     }
@@ -43,68 +59,78 @@ public class Panel extends JPanel {
     @Override
     public void update(Graphics g) {
 
-        /**
-         * Gravedad y movimiento
-         */
-        try {
-            if (mode) {
-                ball.ac.AddVector(G);
-            } else {
-                PointerInfo a = MouseInfo.getPointerInfo();
-                Point b = a.getLocation();
-                Double x = (double) b.getX();
-                Double y = (double) b.getY();
-                Vector Mouse = new Vector(x, y);
-                Vector unim = Mouse.Uni();
+            for (int i = 0; i < balls.size(); i++) {
+                /**
+                 * Gravedad y movimiento
+                 */
+                try {
+                    if (mouseMode) {
+                        balls.get(i).vel.AddVector(G);
+                    } else { //El puntero va por debajo del raton!!!
+                        Point b = MouseInfo.getPointerInfo().getLocation();
+                        SwingUtilities.convertPointFromScreen(b, this); //
+                        Double x = (double) b.getX() - (Ball.rad / 2);
+                        Double y = (double) b.getY() - (Ball.rad / 2);
+                        Vector Mouse = new Vector(x, y); //vector del raton
+                        Vector newpos = Vector.Sub(Mouse, balls.get(i).pos);
+                        Vector unim = newpos.Uni();
+                        unim.EMultVector(G.vector[1]);
+                        balls.get(i).vel.AddVector(unim);
+                    }
 
-                System.out.println(unim);
-                ball.vel.AddVector(G);
-            }
+                } catch (UserExceptions.DiferentDimensionException e) {
+                    System.out.println("ERROR: " + e.getMessage());
+                }
+                balls.get(i).pos.vector[0] += balls.get(i).vel.vector[0];
 
-        } catch (UserExceptions.DiferentDimensionException e) {
-            System.out.println("ERROR: " + e.getMessage());
-        }
-        ball.pos.vector[0] += ball.vel.vector[0] + ball.ac.vector[0];
-        ball.pos.vector[1] += ball.vel.vector[1] + ball.ac.vector[1];
+                balls.get(i).pos.vector[1] += balls.get(i).vel.vector[1];
 
-        /**
-         * TP horizontal
-         */
-        if (ball.pos.vector[0] < -ball.dim) { //Limite izquierdo de la pantalla
-            ball.pos.vector[0] = (double) Main.Width;
-            System.out.println("TP x izquierda");
-        } else if ((ball.pos.vector[0] > Main.Width)) { //Limite derecho de la pantalla
-            ball.pos.vector[0] = (double) -ball.dim;
-            System.out.println("TP X derecha");
-        }
-        /**
-         * TP vertical
-         */
-//        if (ball.pos.vector[1] < -ball.dim) { //Limite superior de la pantalla
-//            ball.pos.vector[1] = (double) Main.Height + 20;
-//            System.out.println("TP y arriba");
-//        } else if (ball.pos.vector[1] > (Main.Height + 20)) {
-//            ball.pos.vector[1] = (double) -ball.dim;//Limite inferior de la pantalla
-//            System.out.println("TP y Abajo");
-//        }
-        /**
-         * Rebote horizontal
-         */
-//        if ((ball.pos.vector[0] < 0) || (ball.pos.vector[0] > (Main.Width - ball.dim))) { //Limites de la pantalla
-//            ball.vel.vector[0] *= -1; //Cambio del signo de la componente x - rebote
-//            System.out.println("Reboto x");
-//        }
-        /**
-         * Rebote vertical
-         */
-        if ((ball.pos.vector[1] < 0) || (ball.pos.vector[1] > Main.Height - 20 - ball.dim)) { //Limites de la pantalla
-            ball.vel.vector[1] *= -1; //Cambio del signo de la componente y - rebote
-            System.out.println("Reboto y");
-        }
-        if (ball.vel.vector[0] > Terminal.vector[0]) {
-            ball.vel.vector[0] = Terminal.vector[0];
-        } else if (ball.vel.vector[1] > Terminal.vector[1]) {
-            ball.vel.vector[1] = Terminal.vector[1];
+                if (wallMode) {
+                    /**
+                     * TP horizontal
+                     */
+                    if (balls.get(i).pos.vector[0] < -Ball.rad) { //Limite izquierdo de la pantalla
+                        balls.get(i).pos.vector[0] = (double) Main.Width;
+
+                    } else if ((balls.get(i).pos.vector[0] > Main.Width)) { //Limite derecho de la pantalla
+                        balls.get(i).pos.vector[0] = (double) -Ball.rad;
+                    }
+                    /**
+                     * TP vertical
+                     */
+                    if (balls.get(i).pos.vector[1] < -Ball.rad) { //Limite superior de la pantalla
+                        balls.get(i).pos.vector[1] = (double) Main.Height + 20;
+                    } else if (balls.get(i).pos.vector[1] > (Main.Height + 20)) {
+                        balls.get(i).pos.vector[1] = (double) -Ball.rad;//Limite inferior de la pantalla
+                    }
+                } else {
+                    /**
+                     * Rebote horizontal
+                     */
+                    if ((balls.get(i).pos.vector[0] < 0) || (balls.get(i).pos.vector[0] > (Main.Width - Ball.rad))) { //Limites de la pantalla
+                        balls.get(i).vel.vector[0] *= -1; //Cambio del signo de la componente x - rebote
+                        balls.get(i).ac.vector[0] *= -1;
+
+                    }
+                    /**
+                     * Rebote vertical
+                     */
+                    if ((balls.get(i).pos.vector[1] < 0) || (balls.get(i).pos.vector[1] > (Main.Height - 20 - Ball.rad))) { //Limites de la pantalla
+                        //           balls.get(i).vel.vector[1] =  -0.001;
+                        balls.get(i).vel.vector[1] *= -1; //Cambio del signo de la componente y - rebote
+                        balls.get(i).ac.vector[1] *= -1;
+
+                    }
+                }
+                /**
+                 * Velocidad terminal
+                 */
+                if ((balls.get(i).vel.vector[0] > Terminal.vector[0]) || (balls.get(i).vel.vector[0] < -Terminal.vector[0])) {
+                    balls.get(i).vel.vector[0] = Terminal.vector[0] * Math.signum(balls.get(i).vel.vector[0]);
+                }
+                if ((balls.get(i).vel.vector[1] > Terminal.vector[1]) || (balls.get(i).vel.vector[1] < -Terminal.vector[1])) {
+                    balls.get(i).vel.vector[1] = Terminal.vector[1] * Math.signum(balls.get(i).vel.vector[1]);
+                }
         }
 
         repaint();
