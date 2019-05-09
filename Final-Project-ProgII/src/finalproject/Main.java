@@ -3,7 +3,6 @@
  */
 package finalproject;
 
-import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,7 +32,7 @@ public class Main extends JFrame {
         panel = new Panel();
         setWalls = new JCheckBox("With walls", true);
         followMouse = new JCheckBox("Follow mouse", false);
-        ballNumber = new JTextField();
+        ballNumber = new JTextField("2");
         ballLabel = new JLabel("# Balls");
 
         ballNumber.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
@@ -139,6 +138,7 @@ public class Main extends JFrame {
                                 .addComponent(followMouse, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        setResizable(false);
         pack();
         setLocationRelativeTo(null); //centrado
     }

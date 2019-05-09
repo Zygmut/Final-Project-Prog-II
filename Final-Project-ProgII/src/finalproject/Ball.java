@@ -6,7 +6,6 @@
 package finalproject;
 
 import java.awt.Color;
-
 import java.util.Random;
 import javax.swing.JPanel;
 
@@ -42,4 +41,23 @@ public class Ball extends JPanel {
         return new Color(R, G, B);
     }
 
+    public void rebound(Integer comp) {
+        vel.vector[comp] *= -1; //Cambio del signo de la componente x - rebound
+        ac.vector[comp] *= -1;
+    }
+
+    public void tp() {
+
+    }
+
+    public void move() {
+        try {
+            vel.AddVector(ac);
+            pos.AddVector(vel);
+        } catch (UserExceptions.DiferentDimensionException e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
+//        pos.vector[0] += vel.vector[0];
+//        pos.vector[1] += vel.vector[1];
+    }
 }
