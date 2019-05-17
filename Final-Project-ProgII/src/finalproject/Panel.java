@@ -32,12 +32,12 @@ public class Panel extends JPanel {
 
     public Panel() {
         balls = new ArrayList<>();
+        populate();
     }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-
-        super.paintComponent(g);
+/**
+ * popula el array de bolas 
+ */
+    public void populate() {
         Double xpos, ypos;
         if (balls.size() < length) {
             for (int i = 0; i < length; i++) {
@@ -47,6 +47,12 @@ public class Panel extends JPanel {
                 balls.add(aux);
             }
         }
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
         for (int i = 0; i < balls.size(); i++) { //creacion del array de bolas
             balls.get(i).paint(g);
         }
@@ -87,7 +93,7 @@ public class Panel extends JPanel {
                 balls.get(i).rebound();
             } else {
 
-               balls.get(i).tp();
+                balls.get(i).tp();
             }
             /**
              * Velocidad terminal

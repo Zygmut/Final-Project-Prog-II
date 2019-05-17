@@ -56,6 +56,7 @@ public class Main extends JFrame {
                 if (numeric) {
                     panel.balls.clear();
                     panel.length = num;
+                    panel.populate();
                 }
             }
 
@@ -141,7 +142,6 @@ public class Main extends JFrame {
         setResizable(false);
         pack();
         setLocationRelativeTo(null); //centrado
-//        panel.start();
     }
 
     /**

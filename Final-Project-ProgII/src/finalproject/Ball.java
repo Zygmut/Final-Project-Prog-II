@@ -47,7 +47,6 @@ public class Ball {
     /**
      * Rebotar en las paredes
      *
-     * @param comp
      */
     public void rebound() {
         /**
@@ -65,8 +64,13 @@ public class Ball {
         }
 
     }
-
+/**
+ * Teletransportarse 
+ */
     public void tp() {
+        /**
+         * TP horizontal
+         */
         if (position.vector[0] < -Ball.radius) { //Limite izquierdo de la pantalla
             position.vector[0] = (double) Main.Width;
 
