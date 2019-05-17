@@ -74,7 +74,7 @@ public class Main extends JFrame {
             }
         });
 
-        followMouse.setFont(new java.awt.Font("Dialog", 0, 16)); 
+        followMouse.setFont(new java.awt.Font("Dialog", 0, 16));
         followMouse.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,7 +99,7 @@ public class Main extends JFrame {
         );
 
         ballLabel.setFont(new java.awt.Font("Dialog", 0, 18));
-        
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,6 +141,7 @@ public class Main extends JFrame {
         setResizable(false);
         pack();
         setLocationRelativeTo(null); //centrado
+//        panel.start();
     }
 
     /**
