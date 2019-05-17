@@ -13,6 +13,8 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -48,6 +50,12 @@ public class Panel extends JPanel {
             }
         }
     }
+    
+//    public void start() throws InterruptedException{
+//        update();
+//        Thread.sleep(10);
+//        repaint();
+//    }
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -56,10 +64,10 @@ public class Panel extends JPanel {
         for (int i = 0; i < balls.size(); i++) { //creacion del array de bolas
             balls.get(i).paint(g);
         }
-        update(g);
+     update(g);
     }
 
-    @Override
+    
     public void update(Graphics g) {
 
         for (int i = 0; i < balls.size(); i++) {
@@ -104,8 +112,10 @@ public class Panel extends JPanel {
             if ((balls.get(i).velocity.vector[1] > Terminal.vector[1]) || (balls.get(i).velocity.vector[1] < -Terminal.vector[1])) {
                 balls.get(i).velocity.vector[1] = Terminal.vector[1] * Math.signum(balls.get(i).velocity.vector[1]);
             }
+            
+            repaint();
         }
-        repaint();
+        
     }
 
 }
