@@ -20,7 +20,7 @@ import javax.swing.SwingUtilities;
 public class Panel extends JPanel {
 
     static Vector G = new Vector(0.00, 0.012); //Vector gravedad
-    static Vector Terminal = new Vector(2.0, 2.0); //Vector velocidad 
+    static Vector Terminal = new Vector(1., 1.); //Vector velocidad 2x2
     ArrayList<Ball> balls; //array que contiene las bolas
     Integer arrayLength = 2; //equivalente a 
     Boolean mouseMode = false;
@@ -79,12 +79,12 @@ public class Panel extends JPanel {
                     Double y = (double) b.getY() - (Ball.radius / 2);
 
                     Vector Mouse = new Vector(x, y); //vector del raton
-                    Vector uniMouse = (Vector.Sub(Mouse, balls.get(i).position)).Uni();
+                    Vector uniMouse = (Vector.Sub(Mouse, balls.get(i).getPosition())).Uni();
                     uniMouse.EMultVector(G.vector[1]); // se multiplica por el modulo de la graved que en este caso sera su componente y
-                    balls.get(i).acceleration = uniMouse;
+                    balls.get(i).setAcceleration(uniMouse);
 
                 } else {
-                    balls.get(i).acceleration = G;
+                    balls.get(i).setAcceleration(G);
                 }
             } catch (UserExceptions.DiferentDimensionException e) {
                 System.out.println("ERROR: " + e.getMessage());
@@ -103,11 +103,13 @@ public class Panel extends JPanel {
             /**
              * Velocidad terminal
              */
-            if ((balls.get(i).velocity.vector[0] > Terminal.vector[0]) || (balls.get(i).velocity.vector[0] < -Terminal.vector[0])) {
-                balls.get(i).velocity.vector[0] = Terminal.vector[0] * Math.signum(balls.get(i).velocity.vector[0]);
+            if ((balls.get(i).getVelocity().vector[0] > Terminal.vector[0]) || (balls.get(i).getVelocity().vector[0] < -Terminal.vector[0])) {
+                double terminal = Terminal.vector[0] * Math.signum(balls.get(i).getVelocity().vector[0]);
+                balls.get(i).setVelocity(new Vector(terminal, balls.get(i).getVelocity().vector[1]));
             }
-            if ((balls.get(i).velocity.vector[1] > Terminal.vector[1]) || (balls.get(i).velocity.vector[1] < -Terminal.vector[1])) {
-                balls.get(i).velocity.vector[1] = Terminal.vector[1] * Math.signum(balls.get(i).velocity.vector[1]);
+            if ((balls.get(i).getVelocity().vector[1] > Terminal.vector[1]) || (balls.get(i).getVelocity().vector[1] < -Terminal.vector[1])) {
+                double terminal = Terminal.vector[1] * Math.signum(balls.get(i).getVelocity().vector[1]);
+                balls.get(i).setVelocity(new Vector(balls.get(i).getVelocity().vector[0], terminal));
             }
         }
 

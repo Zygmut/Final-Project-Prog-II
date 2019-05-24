@@ -21,16 +21,4 @@ public class UserExceptions extends Exception {
             super("The vectors selected don't have the same dimension");
         }
     }
-
-    /**
-     * Exception que salta cuando intentas saber un valor de un vector que no
-     * tiene dicha componente
-     */
-    static class SingleDiferentDimensionException extends Exception {
-
-        public SingleDiferentDimensionException() {
-            super("The vector does not has a different dimension");
-        }
-    }
-
 }

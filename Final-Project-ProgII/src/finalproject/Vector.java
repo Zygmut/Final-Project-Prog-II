@@ -15,16 +15,30 @@ public class Vector {
 
     public Double[] vector;
 
+    /**
+     * void constructor
+     *
+     * @param dim
+     */
     public Vector(Integer dim) {
         this.vector = new Double[dim];
     }
-
+    /**
+     * "2d" Vector
+     * @param x
+     * @param y 
+     */
     public Vector(Double x, Double y) {
         this.vector = new Double[2];
         this.vector[0] = x;
         this.vector[1] = y;
     }
-
+    /**
+     * "3d" Vector
+     * @param x
+     * @param y
+     * @param z 
+     */
     public Vector(Double x, Double y, Double z) {
         this.vector = new Double[3];
         this.vector[0] = x;
@@ -64,15 +78,15 @@ public class Vector {
     }
 
     /**
-     * Devuelve el modulo del vector pasado por parametro
+     * Version estatica de module
      *
-     * @param y
+     * @param Vx
      * @return
      */
-    public static Double module(Vector y) {
+    public static Double module(Vector Vx) {
         Double sum = 0.00;
-        for (int i = 0; i < y.getDim(); i++) {
-            sum += y.vector[i] * y.vector[i];
+        for (int i = 0; i < Vx.getDim(); i++) {
+            sum += Vx.vector[i] * Vx.vector[i];
         }
         return Math.sqrt(sum);
     }
@@ -80,34 +94,34 @@ public class Vector {
     /**
      * Permite sumar dos vectores
      *
-     * @param y
+     * @param Vx
      * @throws finalproject.UserExceptions.DiferentDimensionException
      */
-    public void AddVector(Vector y) throws DiferentDimensionException {
-        if (!(this.vector.length == y.getDim())) {
+    public void AddVector(Vector Vx) throws DiferentDimensionException {
+        if (!(this.vector.length == Vx.getDim())) {
             throw new DiferentDimensionException();
         }
         for (int i = 0; i < vector.length; i++) {
-            vector[i] += y.vector[i];
+            vector[i] += Vx.vector[i];
         }
     }
 
     /**
-     * Permite sumar dos vectores pasados como parametros
+     * Version estatica de AddVector
      *
-     * @param x
-     * @param y
+     * @param Vx
+     * @param Vy
      * @return z
      * @throws finalproject.UserExceptions.DiferentDimensionException
      */
-    public static Vector Add(Vector x, Vector y) throws DiferentDimensionException {
+    public static Vector Add(Vector Vx, Vector Vy) throws DiferentDimensionException {
         Vector z;
-        if (!(x.getDim() == y.getDim())) {
+        if (!(Vx.getDim() == Vy.getDim())) {
             throw new DiferentDimensionException();
         }
-        z = new Vector(x.getDim());
-        for (int i = 0; i < x.getDim(); i++) {
-            z.vector[i] = x.vector[i] + y.vector[i];
+        z = new Vector(Vx.getDim());
+        for (int i = 0; i < Vx.getDim(); i++) {
+            z.vector[i] = Vx.vector[i] + Vy.vector[i];
         }
         return z;
     }
@@ -115,35 +129,35 @@ public class Vector {
     /**
      * Permite restar dos vectores
      *
-     * @param y
+     * @param Vx
      * @throws finalproject.UserExceptions.DiferentDimensionException
      */
-    public void SubVector(Vector y) throws DiferentDimensionException {
+    public void SubVector(Vector Vx) throws DiferentDimensionException {
 
-        if (!(this.vector.length == y.getDim())) {
+        if (!(this.vector.length == Vx.getDim())) {
             throw new DiferentDimensionException();
         }
         for (int i = 0; i < vector.length; i++) {
-            vector[i] -= y.vector[i];
+            vector[i] -= Vx.vector[i];
         }
     }
 
     /**
-     * Permite restar dos vectores pasados como parametros
+     * Version estatica de SubVector
      *
-     * @param x
-     * @param y
+     * @param Vx
+     * @param Vy
      * @return z
      * @throws finalproject.UserExceptions.DiferentDimensionException
      */
-    public static Vector Sub(Vector x, Vector y) throws DiferentDimensionException {
+    public static Vector Sub(Vector Vx, Vector Vy) throws DiferentDimensionException {
         Vector z;
-        if (!(x.getDim() == y.getDim())) {
+        if (!(Vx.getDim() == Vy.getDim())) {
             throw new DiferentDimensionException();
         }
-        z = new Vector(x.getDim());
-        for (int i = 0; i < x.getDim(); i++) {
-            z.vector[i] = x.vector[i] - y.vector[i];
+        z = new Vector(Vx.getDim());
+        for (int i = 0; i < Vx.getDim(); i++) {
+            z.vector[i] = Vx.vector[i] - Vy.vector[i];
         }
         return z;
     }
@@ -160,16 +174,16 @@ public class Vector {
     }
 
     /**
-     * Permite multiplicar un vector por un valor ambos pasados como parametro
+     * Version estatica de EMultVector
      *
-     * @param x
+     * @param Vx
      * @param y
      * @return z
      */
-    public static Vector EMult(Vector x, Double y) {
-        Vector z = new Vector(x.getDim());
-        for (int i = 0; i < 10; i++) {
-            z.vector[i] = x.vector[i] * y;
+    public static Vector EMult(Vector Vx, Double y) {
+        Vector z = new Vector(Vx.getDim());
+        for (int i = 0; i < Vx.getDim(); i++) {
+            z.vector[i] = Vx.vector[i] * y;
         }
         return z;
     }
@@ -186,16 +200,16 @@ public class Vector {
     }
 
     /**
-     * Permite dividir un vector por un valor ambos pasados como parametro
+     * Version estatica de EDivVector
      *
-     * @param x
+     * @param Vx
      * @param y
      * @return z
      */
-    public static Vector EDiv(Vector x, Double y) {
-        Vector z = new Vector(x.getDim());
-        for (int i = 0; i < 10; i++) {
-            z.vector[i] = x.vector[i] / y;
+    public static Vector EDiv(Vector Vx, Double y) {
+        Vector z = new Vector(Vx.getDim());
+        for (int i = 0; i < Vx.getDim(); i++) {
+            z.vector[i] = Vx.vector[i] / y;
         }
         return z;
     }
@@ -215,16 +229,16 @@ public class Vector {
     }
 
     /**
-     * Permite saber el vector unitario de un vector pasado por parametro
+     * Version estatica de Uni
      *
-     * @param y
+     * @param Vx
      * @return z
      */
-    public static Vector Uni(Vector y) {
-        Vector z = new Vector(y.getDim());
-        Double mod = Vector.module(y);
-        for (int i = 0; i < 10; i++) {
-            z.vector[i] = y.vector[i] / mod;
+    public static Vector Uni(Vector Vx) {
+        Vector z = new Vector(Vx.getDim());
+        Double mod = Vector.module(Vx);
+        for (int i = 0; i < Vx.getDim(); i++) {
+            z.vector[i] = Vx.vector[i] / mod;
         }
         return z;
     }
@@ -233,37 +247,63 @@ public class Vector {
      * Devuelve el producto escalar entre el vector x y un vector pasado por
      * parametro
      *
-     * @param y
+     * @param Vx
      * @return sum
      * @throws finalproject.UserExceptions.DiferentDimensionException
      */
-    public Double EscVector(Vector y) throws DiferentDimensionException {
+    public Double EscVector(Vector Vx) throws DiferentDimensionException {
         Double sum = 0.00;
-        if (!(vector.length == y.getDim())) {
+        if (!(vector.length == Vx.getDim())) {
             throw new DiferentDimensionException();
         }
         for (int i = 0; i < vector.length; i++) {
-            sum += vector[i] * y.vector[i];
+            sum += vector[i] * Vx.vector[i];
         }
         return sum;
     }
 
     /**
-     * Devuelve el producto escalar de dos vectores pasados por parametro
+     * Version estatica de EscVector
      *
-     * @param x
-     * @param y
+     * @param Vx
+     * @param Vy
      * @return sum
      * @throws finalproject.UserExceptions.DiferentDimensionException
      */
-    public static Double EscVector(Vector x, Vector y) throws DiferentDimensionException {
+    public static Double EscVector(Vector Vx, Vector Vy) throws DiferentDimensionException {
         Double sum = 0.00;
-        if (!(x.getDim() == y.getDim())) {
+        if (!(Vx.getDim() == Vy.getDim())) {
             throw new DiferentDimensionException();
         }
-        for (int i = 0; i < x.getDim(); i++) {
-            sum += x.vector[i] * y.vector[i];
+        for (int i = 0; i < Vx.getDim(); i++) {
+            sum += Vx.vector[i] * Vy.vector[i];
         }
         return sum;
+    }
+
+    /**
+     * Si la magnitud es mayor que un valor máximo, normalizar el vector y hacer
+     * la multiplicación escalar por el máximo
+     *
+     * @param max
+     */
+    public void limit(Double max) {
+        if (module() > max) {
+            Uni();
+            EMultVector(max);
+        }
+    }
+
+    /**
+     * Version estatica de limit
+     *
+     * @param Vx
+     * @param max
+     */
+    static void limit(Vector Vx, Double max) {
+        if (Vx.module() > max) {
+            Vx.Uni();
+            Vx.EMultVector(max);
+        }
     }
 }

@@ -18,10 +18,10 @@ import java.util.Random;
  */
 public class Ball {
 
-    public Vector position;
-    public Vector velocity;
-    public Vector acceleration;
-    public static Integer radius = 45;
+    private Vector position;
+    private Vector velocity;
+    private Vector acceleration;
+    public final static Integer radius = 45;
     public Color color;
 
     public Ball(Double x, Double y) {
@@ -64,9 +64,10 @@ public class Ball {
         }
 
     }
-/**
- * Teletransportarse 
- */
+
+    /**
+     * Teletransportarse
+     */
     public void tp() {
         /**
          * TP horizontal
@@ -115,4 +116,29 @@ public class Ball {
             System.out.println("ERROR: " + e.getMessage());
         }
     }
+
+    public Vector getPosition() {
+        return position;
+    }
+
+    public void setPosition(Vector position) {
+        this.position = position;
+    }
+
+    public Vector getVelocity() {
+        return velocity;
+    }
+
+    public void setVelocity(Vector velocity) {
+        this.velocity = velocity;
+    }
+
+    public Vector getAcceleration() {
+        return acceleration;
+    }
+
+    public void setAcceleration(Vector acceleration) {
+        this.acceleration = acceleration;
+    }
+
 }
