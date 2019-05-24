@@ -5,16 +5,10 @@
  */
 package finalproject;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -25,10 +19,10 @@ import javax.swing.SwingUtilities;
  */
 public class Panel extends JPanel {
 
-    static Vector G = new Vector(0.00, 0.0001); //0.00005 es tipo luna 0.00198 tierra se puede modificar
-    static Vector Terminal = new Vector(0.22, 0.22);
-    ArrayList<Ball> balls;
-    Integer length = 2;
+    static Vector G = new Vector(0.00, 0.012); //Vector gravedad
+    static Vector Terminal = new Vector(2.0, 2.0); //Vector velocidad 
+    ArrayList<Ball> balls; //array que contiene las bolas
+    Integer arrayLength = 2; //equivalente a 
     Boolean mouseMode = false;
     Boolean wallMode = true;
 
@@ -36,39 +30,42 @@ public class Panel extends JPanel {
         balls = new ArrayList<>();
         populate();
     }
-/**
- * popula el array de bolas 
- */
+
+    /**
+     * popula el array de bolas
+     */
     public void populate() {
         Double xpos, ypos;
-        if (balls.size() < length) {
-            for (int i = 0; i < length; i++) {
-                xpos = (double) Math.random() * (Main.Width - (Ball.radius) - 1); //45 = Ball.radius
-                ypos = (double) Math.random() * (Main.Height - (Ball.radius) - 1); //-20 top margin 
-                Ball aux = new Ball(xpos, ypos);
-                balls.add(aux);
+        for (int i = 0; i < arrayLength; i++) {
+            xpos = (double) Math.random() * (Main.Width - (Ball.radius) - 1);
+            ypos = (double) Math.random() * (Main.Height - (Ball.radius) - 1);
+            Ball aux = new Ball(xpos, ypos);
+            balls.add(aux);
+        }
+
+    }
+
+    public void start() {
+        try {
+            while (true) {
+                update();
+                Thread.sleep(10);
+                repaint();
             }
+        } catch (InterruptedException e) {
+            System.out.println("ERROR: " + e.getMessage());
         }
     }
-    
-//    public void start() throws InterruptedException{
-//        update();
-//        Thread.sleep(10);
-//        repaint();
-//    }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-        for (int i = 0; i < balls.size(); i++) { //creacion del array de bolas
+        for (int i = 0; i < balls.size(); i++) {
             balls.get(i).paint(g);
         }
-     update(g);
     }
 
-    
-    public void update(Graphics g) {
+    public void update() {
 
         for (int i = 0; i < balls.size(); i++) {
             /**
@@ -92,6 +89,7 @@ public class Panel extends JPanel {
             } catch (UserExceptions.DiferentDimensionException e) {
                 System.out.println("ERROR: " + e.getMessage());
             }
+
             balls.get(i).move();
 
             /**
@@ -100,7 +98,6 @@ public class Panel extends JPanel {
             if (wallMode) {
                 balls.get(i).rebound();
             } else {
-
                 balls.get(i).tp();
             }
             /**
@@ -112,10 +109,8 @@ public class Panel extends JPanel {
             if ((balls.get(i).velocity.vector[1] > Terminal.vector[1]) || (balls.get(i).velocity.vector[1] < -Terminal.vector[1])) {
                 balls.get(i).velocity.vector[1] = Terminal.vector[1] * Math.signum(balls.get(i).velocity.vector[1]);
             }
-            
-            repaint();
         }
-        
+
     }
 
 }

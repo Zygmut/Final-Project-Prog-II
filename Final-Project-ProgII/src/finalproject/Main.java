@@ -14,7 +14,7 @@ import javax.swing.JTextField;
  */
 public class Main extends JFrame {
 
-    Panel panel;
+    static Panel panel;
     private javax.swing.JCheckBox setWalls;
     private javax.swing.JCheckBox followMouse;
     private javax.swing.JTextField ballNumber;
@@ -23,7 +23,7 @@ public class Main extends JFrame {
     public static Integer Height = 768;
 
     public Main() {
-        this.setTitle("Final Project");
+        super("Final Project");
         this.setDefaultCloseOperation(Main.EXIT_ON_CLOSE);
         initcomponents();
     }
@@ -35,7 +35,7 @@ public class Main extends JFrame {
         ballNumber = new JTextField("2");
         ballLabel = new JLabel("# Balls");
 
-        ballNumber.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        ballNumber.setFont(new java.awt.Font("Dialog", 0, 24)); 
         ballNumber.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         ballNumber.addActionListener(new java.awt.event.ActionListener() {
             @Override
@@ -43,35 +43,46 @@ public class Main extends JFrame {
                 ballNumberActionPerformed(evt);
             }
 
+            /**
+             * controlador del la caja de texto
+             *
+             * @param evt
+             */
             private void ballNumberActionPerformed(java.awt.event.ActionEvent evt) {
                 String text = ballNumber.getText();
                 Integer num = 0;
                 boolean numeric = true;
+                /**
+                 * Detectar si lo que el usuario pone dentro de la caja de texto
+                 * es un numero, en caso de que no lo sea impide que se haga lo
+                 * habitual cambiando un booleano
+                 */
                 try {
                     num = Integer.parseInt(text);
                 } catch (NumberFormatException e) {
-                    System.out.println("Not a number"); //Exception
                     numeric = false;
                 }
                 if (numeric) {
                     panel.balls.clear();
-                    panel.length = num;
+                    panel.arrayLength = num;
                     panel.populate();
                 }
             }
 
         });
 
-        setWalls.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        setWalls.setFont(new java.awt.Font("Dialog", 0, 16)); 
         setWalls.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 setWallsActionPerformed(evt);
             }
-
+            /**
+             * Controlador de la checkbox "With walls"
+             * @param evt 
+             */
             private void setWallsActionPerformed(java.awt.event.ActionEvent evt) {
                 panel.wallMode = setWalls.isSelected();
-
             }
         });
 
@@ -81,7 +92,11 @@ public class Main extends JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 followMouseActionPerformed(evt);
             }
-
+            /**
+             * Controlador de la checkbox "Follow mouse"
+             *
+             * @param evt
+             */
             private void followMouseActionPerformed(java.awt.event.ActionEvent evt) {
                 panel.mouseMode = followMouse.isSelected();
             }
@@ -141,7 +156,7 @@ public class Main extends JFrame {
         );
         setResizable(false);
         pack();
-        setLocationRelativeTo(null); //centrado
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -149,6 +164,7 @@ public class Main extends JFrame {
      */
     public static void main(String[] args) {
         new Main().setVisible(true);
+        panel.start();
     }
 
 }
