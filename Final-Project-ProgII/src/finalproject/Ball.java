@@ -46,7 +46,7 @@ public class Ball {
     }
 
     /**
-     * Rebotar en las paredes
+     * Rebote en las paredes
      */
     public void rebound() {
         //Rebote horizontal
@@ -60,7 +60,7 @@ public class Ball {
     }
 
     /**
-     * Teletransportarse
+     * Teletransporte
      */
     public void tp() {
         //TP horizontal
@@ -95,7 +95,7 @@ public class Ball {
     }
 
     /**
-     * Calculo de la nueva posicion de la bola
+     * Calculo de la posicion de la bola y limitador de velocidad
      *
      */
     public void move() {
@@ -105,7 +105,6 @@ public class Ball {
         } catch (Exception e) {
             System.out.println("ERROR: " + e.getMessage());
         }
-
         //Velocidad terminal
         if (Math.abs(velocity.vector[0]) > Terminal.vector[0]) {
             velocity.vector[0] = Terminal.vector[0] * Math.signum(velocity.vector[0]);

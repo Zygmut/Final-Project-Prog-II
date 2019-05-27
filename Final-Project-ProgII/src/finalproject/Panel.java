@@ -21,8 +21,8 @@ public class Panel extends JPanel {
     public static final Integer Height = 759; //Jpanel Heigth
     public static final Integer Width = 1036; //Jpanel Width
     private static final Vector G = new Vector(0.00, 0.012); //Vector gravedad
-    private ArrayList<Ball> balls; //arraylist que contiene las bolas
-    private Integer arrayLength = 2; //equivalente a balls.size
+    private ArrayList<Ball> balls; //Arraylist que contiene las bolas
+    private Integer arrayLength = 2; //Equivalente a balls.size
     private Boolean mouseMode = false;
     private Boolean wallMode = true;
 
@@ -38,12 +38,11 @@ public class Panel extends JPanel {
         balls.clear();
         Double xpos, ypos;
         for (int i = 0; i < arrayLength; i++) {
-            xpos = (double) Math.random() * (Width - (Ball.radius) - 1);
-            ypos = (double) Math.random() * (Height - (Ball.radius) - 1);
+            xpos = (double) Math.random() * (Width - Ball.radius);
+            ypos = (double) Math.random() * (Height - Ball.radius);
             Ball aux = new Ball(xpos, ypos);
             balls.add(aux);
         }
-
     }
 
     public void start() {
@@ -67,17 +66,16 @@ public class Panel extends JPanel {
     }
 
     public void update() {
-
         for (int i = 0; i < balls.size(); i++) {
-            //Gravedad respectiva al raton o al "suelo"
             try {
+                //Gravedad respectiva al raton o al "suelo"
                 if (mouseMode) {
                     Point b = MouseInfo.getPointerInfo().getLocation();
                     SwingUtilities.convertPointFromScreen(b, this); //sistema de posicion respectivo al panel
-                    Double x = (double) b.getX() - (Ball.radius / 2);
-                    Double y = (double) b.getY() - (Ball.radius / 2);
-                    Vector Mouse = new Vector(x, y); //vector del raton
-                    Vector uniMouse = (Vector.Sub(Mouse, balls.get(i).getPosition())).Uni();
+                    Double mouseX = (double) b.getX() - (Ball.radius / 2);
+                    Double mouseY = (double) b.getY() - (Ball.radius / 2);
+                    Vector Mouse = new Vector(mouseX, mouseY); //vector del raton
+                    Vector uniMouse = (Vector.Sub(Mouse, balls.get(i).getPosition()).Uni());
                     uniMouse.EMultVector(G.module());
                     balls.get(i).setAcceleration(uniMouse);
                 } else {
@@ -86,9 +84,7 @@ public class Panel extends JPanel {
             } catch (HeadlessException e) {
                 System.out.println("ERROR: " + e.getMessage());
             }
-
             balls.get(i).move();
-
             //Rebote o TP
             if (wallMode) {
                 balls.get(i).rebound();
