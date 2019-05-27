@@ -1,8 +1,10 @@
 /*
+ * Ruben Palmer Perez
  * Clase principal del programa
  */
 package finalproject;
 
+import java.awt.Color;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,8 +21,6 @@ public class Main extends JFrame {
     private javax.swing.JCheckBox followMouse;
     private javax.swing.JTextField ballNumber;
     private javax.swing.JLabel ballLabel;
-    public static Integer Width = 1024;
-    public static Integer Height = 768;
 
     public Main() {
         super("Final Project");
@@ -35,7 +35,7 @@ public class Main extends JFrame {
         ballNumber = new JTextField("2");
         ballLabel = new JLabel("# Balls");
 
-        ballNumber.setFont(new java.awt.Font("Dialog", 0, 24)); 
+        ballNumber.setFont(new java.awt.Font("Dialog", 0, 24));
         ballNumber.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         ballNumber.addActionListener(new java.awt.event.ActionListener() {
             @Override
@@ -44,7 +44,8 @@ public class Main extends JFrame {
             }
 
             /**
-             * controlador del la caja de texto
+             * controlador del la caja de texto que define la cantidad de bolas
+             * que hay en la simulacion
              *
              * @param evt
              */
@@ -52,57 +53,54 @@ public class Main extends JFrame {
                 String text = ballNumber.getText();
                 Integer num = 0;
                 boolean numeric = true;
-                /**
-                 * Detectar si lo que el usuario pone dentro de la caja de texto
-                 * es un numero, en caso de que no lo sea impide que se haga lo
-                 * habitual cambiando un booleano
-                 */
+
                 try {
                     num = Integer.parseInt(text);
                 } catch (NumberFormatException e) {
                     numeric = false;
                 }
                 if (numeric) {
-                    panel.balls.clear();
-                    panel.arrayLength = num;
+                    panel.setArrayLength(num);
                     panel.populate();
                 }
             }
 
         });
-
-        setWalls.setFont(new java.awt.Font("Dialog", 0, 16)); 
+        setWalls.setBackground(Color.lightGray);
+        setWalls.setFont(new java.awt.Font("Dialog", 0, 16));
         setWalls.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 setWallsActionPerformed(evt);
             }
+
             /**
              * Controlador de la checkbox "With walls"
-             * @param evt 
+             *
+             * @param evt
              */
             private void setWallsActionPerformed(java.awt.event.ActionEvent evt) {
-                panel.wallMode = setWalls.isSelected();
+                panel.setWallMode(setWalls.isSelected());
             }
         });
-
+        followMouse.setBackground(Color.lightGray);
         followMouse.setFont(new java.awt.Font("Dialog", 0, 16));
         followMouse.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 followMouseActionPerformed(evt);
             }
+
             /**
              * Controlador de la checkbox "Follow mouse"
              *
              * @param evt
              */
             private void followMouseActionPerformed(java.awt.event.ActionEvent evt) {
-                panel.mouseMode = followMouse.isSelected();
+                panel.setMouseMode(followMouse.isSelected());
             }
         });
 
-        panel.setForeground(new java.awt.Color(102, 102, 102));
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
@@ -154,6 +152,7 @@ public class Main extends JFrame {
                                 .addComponent(followMouse, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        getContentPane().setBackground(Color.lightGray);
         setResizable(false);
         pack();
         setLocationRelativeTo(null);

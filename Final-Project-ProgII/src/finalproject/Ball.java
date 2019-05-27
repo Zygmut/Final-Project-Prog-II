@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Ruben Palmer Perez
+ * Gestion y definicion de bola
  */
 package finalproject;
 
@@ -18,11 +17,13 @@ import java.util.Random;
  */
 public class Ball {
 
+    private static final Vector Terminal = new Vector(2.0, 2.0); //velocidad terminal
     private Vector position;
     private Vector velocity;
     private Vector acceleration;
     public final static Integer radius = 45;
-    public Color color;
+    private final Color color;
+    private Ellipse2D shape;
 
     public Ball(Double x, Double y) {
         position = new Vector(x, y);
@@ -34,7 +35,7 @@ public class Ball {
     /**
      * Crea un color aleatorio para la bola
      *
-     * @return
+     * @return Color
      */
     public static Color rndColor() {
         Random rnd = new Random();
@@ -46,47 +47,34 @@ public class Ball {
 
     /**
      * Rebotar en las paredes
-     *
      */
     public void rebound() {
-        /**
-         * Rebote horizontal
-         */
-
-        if ((position.vector[0] < 0) || (position.vector[0] > (Main.Width - Ball.radius))) { //Limites de la pantalla
+        //Rebote horizontal
+        if ((position.vector[0] < 0) || (position.vector[0] > (Panel.Width - Ball.radius))) {
             velocity.vector[0] *= -1;
         }
-        /**
-         * Rebote vertical
-         */
-        if ((position.vector[1] < 0) || (position.vector[1] > (Main.Height - Ball.radius))) { //Limites de la pantalla
+        //Rebote vertical
+        if ((position.vector[1] < 0) || (position.vector[1] > (Panel.Height - Ball.radius))) {
             velocity.vector[1] *= -1;
         }
-
     }
 
     /**
      * Teletransportarse
      */
     public void tp() {
-        /**
-         * TP horizontal
-         */
+        //TP horizontal
         if (position.vector[0] < -Ball.radius) { //Limite izquierdo de la pantalla
-            position.vector[0] = (double) Main.Width;
-
-        } else if ((position.vector[0] > Main.Width + 20)) { //Limite derecho de la pantalla
+            position.vector[0] = (double) Panel.Width;
+        } else if ((position.vector[0] > Panel.Width + 20)) { //Limite derecho de la pantalla
             position.vector[0] = (double) -Ball.radius;
         }
-        /**
-         * TP vertical
-         */
+        //TP vertical
         if (position.vector[1] < -Ball.radius) { //Limite superior de la pantalla
-            position.vector[1] = (double) Main.Height;
-        } else if (position.vector[1] > Main.Height) {
+            position.vector[1] = (double) Panel.Height;
+        } else if (position.vector[1] > Panel.Height) {
             position.vector[1] = (double) -Ball.radius;//Limite inferior de la pantalla
         }
-
     }
 
     /**
@@ -96,12 +84,14 @@ public class Ball {
      */
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        Ellipse2D circle = new Ellipse2D.Double(position.vector[0], position.vector[1], Ball.radius, Ball.radius);
+        shape = new Ellipse2D.Double(position.vector[0], position.vector[1], Ball.radius, Ball.radius);
+        //Borde de la bola 
         g2d.setColor(new Color(50, 50, 50));
         g2d.setStroke(new BasicStroke(Ball.radius / 7));
-        g2d.draw(circle);
+        g2d.draw(shape);
+        //Interior de la bola
         g2d.setColor(color);
-        g2d.fill(circle);
+        g2d.fill(shape);
     }
 
     /**
@@ -112,29 +102,21 @@ public class Ball {
         try {
             velocity.AddVector(acceleration);
             position.AddVector(velocity);
-        } catch (UserExceptions.DiferentDimensionException e) {
+        } catch (Exception e) {
             System.out.println("ERROR: " + e.getMessage());
+        }
+
+        //Velocidad terminal
+        if (Math.abs(velocity.vector[0]) > Terminal.vector[0]) {
+            velocity.vector[0] = Terminal.vector[0] * Math.signum(velocity.vector[0]);
+        }
+        if (Math.abs(velocity.vector[1]) > Terminal.vector[1]) {
+            velocity.vector[1] = Terminal.vector[1] * Math.signum(velocity.vector[1]);
         }
     }
 
     public Vector getPosition() {
         return position;
-    }
-
-    public void setPosition(Vector position) {
-        this.position = position;
-    }
-
-    public Vector getVelocity() {
-        return velocity;
-    }
-
-    public void setVelocity(Vector velocity) {
-        this.velocity = velocity;
-    }
-
-    public Vector getAcceleration() {
-        return acceleration;
     }
 
     public void setAcceleration(Vector acceleration) {

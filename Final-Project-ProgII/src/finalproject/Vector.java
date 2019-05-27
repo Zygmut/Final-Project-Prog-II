@@ -1,11 +1,8 @@
-package finalproject;
-
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Ruben Palmer Perez
+ * Gestion y definicion de vector
  */
-import finalproject.UserExceptions.*;
+package finalproject;
 
 /**
  *
@@ -23,28 +20,18 @@ public class Vector {
     public Vector(Integer dim) {
         this.vector = new Double[dim];
     }
+
     /**
      * "2d" Vector
+     *
      * @param x
-     * @param y 
+     * @param y
      */
     public Vector(Double x, Double y) {
         this.vector = new Double[2];
         this.vector[0] = x;
         this.vector[1] = y;
-    }
-    /**
-     * "3d" Vector
-     * @param x
-     * @param y
-     * @param z 
-     */
-    public Vector(Double x, Double y, Double z) {
-        this.vector = new Double[3];
-        this.vector[0] = x;
-        this.vector[1] = y;
-        this.vector[2] = z;
-    }
+    } 
 
     /**
      * Devuelve la dimension del vector
@@ -95,12 +82,9 @@ public class Vector {
      * Permite sumar dos vectores
      *
      * @param Vx
-     * @throws finalproject.UserExceptions.DiferentDimensionException
      */
-    public void AddVector(Vector Vx) throws DiferentDimensionException {
-        if (!(this.vector.length == Vx.getDim())) {
-            throw new DiferentDimensionException();
-        }
+    public void AddVector(Vector Vx) {
+
         for (int i = 0; i < vector.length; i++) {
             vector[i] += Vx.vector[i];
         }
@@ -112,13 +96,9 @@ public class Vector {
      * @param Vx
      * @param Vy
      * @return z
-     * @throws finalproject.UserExceptions.DiferentDimensionException
      */
-    public static Vector Add(Vector Vx, Vector Vy) throws DiferentDimensionException {
+    public static Vector Add(Vector Vx, Vector Vy) {
         Vector z;
-        if (!(Vx.getDim() == Vy.getDim())) {
-            throw new DiferentDimensionException();
-        }
         z = new Vector(Vx.getDim());
         for (int i = 0; i < Vx.getDim(); i++) {
             z.vector[i] = Vx.vector[i] + Vy.vector[i];
@@ -130,13 +110,8 @@ public class Vector {
      * Permite restar dos vectores
      *
      * @param Vx
-     * @throws finalproject.UserExceptions.DiferentDimensionException
      */
-    public void SubVector(Vector Vx) throws DiferentDimensionException {
-
-        if (!(this.vector.length == Vx.getDim())) {
-            throw new DiferentDimensionException();
-        }
+    public void SubVector(Vector Vx) {
         for (int i = 0; i < vector.length; i++) {
             vector[i] -= Vx.vector[i];
         }
@@ -148,13 +123,9 @@ public class Vector {
      * @param Vx
      * @param Vy
      * @return z
-     * @throws finalproject.UserExceptions.DiferentDimensionException
      */
-    public static Vector Sub(Vector Vx, Vector Vy) throws DiferentDimensionException {
+    public static Vector Sub(Vector Vx, Vector Vy) {
         Vector z;
-        if (!(Vx.getDim() == Vy.getDim())) {
-            throw new DiferentDimensionException();
-        }
         z = new Vector(Vx.getDim());
         for (int i = 0; i < Vx.getDim(); i++) {
             z.vector[i] = Vx.vector[i] - Vy.vector[i];
@@ -249,13 +220,9 @@ public class Vector {
      *
      * @param Vx
      * @return sum
-     * @throws finalproject.UserExceptions.DiferentDimensionException
      */
-    public Double EscVector(Vector Vx) throws DiferentDimensionException {
+    public Double EscVector(Vector Vx) {
         Double sum = 0.00;
-        if (!(vector.length == Vx.getDim())) {
-            throw new DiferentDimensionException();
-        }
         for (int i = 0; i < vector.length; i++) {
             sum += vector[i] * Vx.vector[i];
         }
@@ -268,13 +235,9 @@ public class Vector {
      * @param Vx
      * @param Vy
      * @return sum
-     * @throws finalproject.UserExceptions.DiferentDimensionException
      */
-    public static Double EscVector(Vector Vx, Vector Vy) throws DiferentDimensionException {
+    public static Double EscVector(Vector Vx, Vector Vy) {
         Double sum = 0.00;
-        if (!(Vx.getDim() == Vy.getDim())) {
-            throw new DiferentDimensionException();
-        }
         for (int i = 0; i < Vx.getDim(); i++) {
             sum += Vx.vector[i] * Vy.vector[i];
         }
