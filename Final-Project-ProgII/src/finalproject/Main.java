@@ -15,7 +15,7 @@ import javax.swing.JTextField;
  * @author Zygmut
  */
 public class Main extends JFrame {
-
+    
     static Panel panel;
     private javax.swing.JCheckBox setWalls;
     private javax.swing.JCheckBox followMouse;
@@ -44,7 +44,7 @@ public class Main extends JFrame {
             }
 
             /**
-             * controlador del la caja de texto que define la cantidad de bolas
+             * Controlador del la caja de texto que define la cantidad de bolas
              * que hay en la simulacion
              *
              * @param evt

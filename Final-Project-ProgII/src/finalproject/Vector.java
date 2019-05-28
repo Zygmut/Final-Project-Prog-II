@@ -12,17 +12,13 @@ public class Vector {
 
     public Double[] vector;
 
-    /**
-     * void constructor
-     *
-     * @param dim
-     */
     public Vector(Integer dim) {
         this.vector = new Double[dim];
     }
 
     /**
-     * "2d" Vector
+     * Creacion de un vector bidimensional cuyos parametros X e Y son pasados
+     * por parametro
      *
      * @param x
      * @param y
@@ -31,10 +27,10 @@ public class Vector {
         this.vector = new Double[2];
         this.vector[0] = x;
         this.vector[1] = y;
-    } 
+    }
 
     /**
-     * Devuelve la dimension del vector
+     * Devuelve la cantidad de componentes que tiene el vector
      *
      * @return Dimension
      */
@@ -65,7 +61,7 @@ public class Vector {
     }
 
     /**
-     * Version estatica de module
+     * Version estatica de module: Devuelve el modulo del vector
      *
      * @param Vx
      * @return
@@ -79,7 +75,7 @@ public class Vector {
     }
 
     /**
-     * Permite sumar dos vectores
+     * Permite sumar als componentes de dos vectores
      *
      * @param Vx
      */
@@ -91,7 +87,8 @@ public class Vector {
     }
 
     /**
-     * Version estatica de AddVector
+     * Version estatica de AddVector: Permite sumar als componentes de dos
+     * vectores
      *
      * @param Vx
      * @param Vy
@@ -107,7 +104,7 @@ public class Vector {
     }
 
     /**
-     * Permite restar dos vectores
+     * Permite restar las componentes de dos vectores
      *
      * @param Vx
      */
@@ -118,7 +115,8 @@ public class Vector {
     }
 
     /**
-     * Version estatica de SubVector
+     * Version estatica de SubVector: Permite restar las componentes de dos
+     * vectores
      *
      * @param Vx
      * @param Vy
@@ -134,7 +132,8 @@ public class Vector {
     }
 
     /**
-     * Permite multiplicar un vector por un valor
+     * Permite multiplicar cad uan de las componentes de un vector por un valor
+     * escalar "y
      *
      * @param y
      */
@@ -145,7 +144,8 @@ public class Vector {
     }
 
     /**
-     * Version estatica de EMultVector
+     * Version estatica de EMultVector: Permite multiplicar cad uan de las
+     * componentes de un vector por un valor escalar "y"
      *
      * @param Vx
      * @param y
@@ -160,7 +160,8 @@ public class Vector {
     }
 
     /**
-     * Permite dividir un vector por un valor
+     * Permite dividir cada una de las componentes de un vector por un valor
+     * escalar "y"
      *
      * @param y
      */
@@ -171,7 +172,8 @@ public class Vector {
     }
 
     /**
-     * Version estatica de EDivVector
+     * Version estatica de EDivVector: Permite dividir cada una de las
+     * componentes de un vector por un valor escalar "y"
      *
      * @param Vx
      * @param y
@@ -200,7 +202,7 @@ public class Vector {
     }
 
     /**
-     * Version estatica de Uni
+     * Version estatica de Uni: Permite saber el vector unitario
      *
      * @param Vx
      * @return z
@@ -215,7 +217,7 @@ public class Vector {
     }
 
     /**
-     * Devuelve el producto escalar entre el vector x y un vector pasado por
+     * Devuelve el producto escalar entre el vector "Vx" y un vector pasado por
      * parametro
      *
      * @param Vx
@@ -230,7 +232,7 @@ public class Vector {
     }
 
     /**
-     * Version estatica de EscVector
+     * Devuelve el producto escalar entre el vector "Vx" y un vector "Vy"
      *
      * @param Vx
      * @param Vy
@@ -245,8 +247,8 @@ public class Vector {
     }
 
     /**
-     * Si la magnitud es mayor que un valor máximo, normalizar el vector y hacer
-     * la multiplicación escalar por el máximo
+     * Si la magnitud es mayor que un valor máximo "max", normalizar el vector y
+     * hacer la multiplicación escalar por "max"
      *
      * @param max
      */
@@ -258,7 +260,9 @@ public class Vector {
     }
 
     /**
-     * Version estatica de limit
+     * Version estatica de limit: Si la magnitud es mayor que un valor máximo
+     * "max", normalizar el vector "Vx" y hacer la multiplicación escalar por
+     * "max"
      *
      * @param Vx
      * @param max

@@ -17,7 +17,7 @@ import java.util.Random;
  */
 public class Ball {
 
-    private static final Vector Terminal = new Vector(2.0, 2.0); //velocidad terminal
+    private static final Vector Terminal = new Vector(2.0, 2.0); 
     private Vector position;
     private Vector velocity;
     private Vector acceleration;
@@ -33,7 +33,7 @@ public class Ball {
     }
 
     /**
-     * Crea un color aleatorio para la bola
+     * Devuelve un nuevo color RGB aleatorio
      *
      * @return Color
      */
@@ -46,39 +46,42 @@ public class Ball {
     }
 
     /**
-     * Rebote en las paredes
+     * Permite cambiar el sentido de la componente velocidad para obtener el
+     * efecto de rebote tanto en el eje X como en el eje Y
      */
     public void rebound() {
-        //Rebote horizontal
+        //REBOTE HORIZONTAL
         if ((position.vector[0] < 0) || (position.vector[0] > (Panel.Width - Ball.radius))) {
             velocity.vector[0] *= -1;
         }
-        //Rebote vertical
+        //REBOTE VERTICAL
         if ((position.vector[1] < 0) || (position.vector[1] > (Panel.Height - Ball.radius))) {
             velocity.vector[1] *= -1;
         }
     }
 
     /**
-     * Teletransporte
+     * Permite cambiar el vector posicion para obtener el efecto de transpasar
+     * paredes y aparecer en el lado contrario
      */
     public void tp() {
-        //TP horizontal
-        if (position.vector[0] < -Ball.radius) { //Limite izquierdo de la pantalla
+        //TP HORIZONTAL
+        if (position.vector[0] < -Ball.radius) {
             position.vector[0] = (double) Panel.Width;
-        } else if ((position.vector[0] > Panel.Width + 20)) { //Limite derecho de la pantalla
+        } else if ((position.vector[0] > Panel.Width + 20)) {
             position.vector[0] = (double) -Ball.radius;
         }
-        //TP vertical
-        if (position.vector[1] < -Ball.radius) { //Limite superior de la pantalla
+        //TP VETRICAL
+        if (position.vector[1] < -Ball.radius) {
             position.vector[1] = (double) Panel.Height;
         } else if (position.vector[1] > Panel.Height) {
-            position.vector[1] = (double) -Ball.radius;//Limite inferior de la pantalla
+            position.vector[1] = (double) -Ball.radius;
         }
     }
 
     /**
-     * Pinta la bola
+     * Renderiza el objeto bola mediante los parametros de esta misma. Un
+     * ejemplo de estos parametros son el radio o su color
      *
      * @param g
      */
@@ -95,7 +98,9 @@ public class Ball {
     }
 
     /**
-     * Calculo de la posicion de la bola y limitador de velocidad
+     * Actualiza el vector velocidad y posicion para obtener un movimiento
+     * natural. Ademas de esto comprueba, y en caso de superarla actualizarla,
+     * si supera su velocidad terminal.
      *
      */
     public void move() {
@@ -105,7 +110,6 @@ public class Ball {
         } catch (Exception e) {
             System.out.println("ERROR: " + e.getMessage());
         }
-        //Velocidad terminal
         if (Math.abs(velocity.vector[0]) > Terminal.vector[0]) {
             velocity.vector[0] = Terminal.vector[0] * Math.signum(velocity.vector[0]);
         }
