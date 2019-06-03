@@ -1,6 +1,5 @@
 /*
  * Ruben Palmer Perez
- * https://youtu.be/w-rqj5lVAgA
  * Gestion y definicion del panel en el que se enuentra la simulacion
  */
 package finalproject;
