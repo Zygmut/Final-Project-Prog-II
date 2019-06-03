@@ -1,6 +1,5 @@
 /*
  * Ruben Palmer Perez
- * https://youtu.be/w-rqj5lVAgA
  * Gestion y definicion de bola
  */
 package finalproject;
