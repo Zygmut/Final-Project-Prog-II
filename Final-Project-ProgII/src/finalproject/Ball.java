@@ -68,13 +68,13 @@ public class Ball {
         //TP HORIZONTAL
         if (position.vector[0] < -Ball.radius) {
             position.vector[0] = (double) Panel.Width;
-        } else if ((position.vector[0] > Panel.Width + 20)) {
+        } else if ((position.vector[0] > Panel.Width)) {
             position.vector[0] = (double) -Ball.radius;
         }
         //TP VETRICAL
         if (position.vector[1] < -Ball.radius) {
             position.vector[1] = (double) Panel.Height;
-        } else if (position.vector[1] > Panel.Height) {
+        } else if (position.vector[1] > Panel.Height + 20) {
             position.vector[1] = (double) -Ball.radius;
         }
     }

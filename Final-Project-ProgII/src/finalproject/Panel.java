@@ -54,8 +54,7 @@ public class Panel extends JPanel {
         try {
             while (true) {
                 update();
-                Thread.sleep(5
-                );
+                Thread.sleep(5);
                 repaint();
             }
         } catch (InterruptedException e) {
@@ -117,5 +116,4 @@ public class Panel extends JPanel {
     public void setWallMode(Boolean wallMode) {
         this.wallMode = wallMode;
     }
-
 }
