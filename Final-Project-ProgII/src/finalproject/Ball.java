@@ -17,7 +17,7 @@ import java.util.Random;
  */
 public class Ball {
 
-    private static final Vector Terminal = new Vector(2.0, 2.0); 
+    private static final Vector Terminal = new Vector(2.0, 2.0);
     private Vector position;
     private Vector velocity;
     private Vector acceleration;
@@ -85,7 +85,7 @@ public class Ball {
      *
      * @param g
      */
-    public void paint(Graphics g) {
+    public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         shape = new Ellipse2D.Double(position.vector[0], position.vector[1], Ball.radius, Ball.radius);
         //Borde de la bola 
@@ -104,18 +104,14 @@ public class Ball {
      *
      */
     public void move() {
-        try {
-            velocity.AddVector(acceleration);
-            position.AddVector(velocity);
-        } catch (Exception e) {
-            System.out.println("ERROR: " + e.getMessage());
-        }
+        velocity.AddVector(acceleration);
         if (Math.abs(velocity.vector[0]) > Terminal.vector[0]) {
             velocity.vector[0] = Terminal.vector[0] * Math.signum(velocity.vector[0]);
         }
         if (Math.abs(velocity.vector[1]) > Terminal.vector[1]) {
             velocity.vector[1] = Terminal.vector[1] * Math.signum(velocity.vector[1]);
         }
+        position.AddVector(velocity);
     }
 
     public Vector getPosition() {

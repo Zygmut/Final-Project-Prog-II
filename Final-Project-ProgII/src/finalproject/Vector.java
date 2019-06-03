@@ -217,7 +217,7 @@ public class Vector {
     }
 
     /**
-     * Devuelve el producto escalar entre el vector "Vx" y un vector pasado por
+     * Devuelve el producto escalar entre el vector y un vector "Vx"pasado por
      * parametro
      *
      * @param Vx

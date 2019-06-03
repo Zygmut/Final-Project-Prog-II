@@ -20,13 +20,16 @@ public class Panel extends JPanel {
 
     public static final Integer Height = 759; //Jpanel Heigth
     public static final Integer Width = 1036; //Jpanel Width
-    private static final Vector G = new Vector(0.00, 0.012); 
-    private ArrayList<Ball> balls; 
-    private Integer arrayLength = 2; 
-    private Boolean mouseMode = false;
-    private Boolean wallMode = true;
+    private static final Vector G = new Vector(0.00, 0.012);
+    private ArrayList<Ball> balls;
+    private Integer arrayLength;
+    private Boolean mouseMode;
+    private Boolean wallMode;
 
     public Panel() {
+        arrayLength = 2;
+        mouseMode = false;
+        wallMode = true;
         balls = new ArrayList<>();
         populate();
     }
@@ -51,7 +54,8 @@ public class Panel extends JPanel {
         try {
             while (true) {
                 update();
-                Thread.sleep(10);
+                Thread.sleep(5
+                );
                 repaint();
             }
         } catch (InterruptedException e) {
@@ -60,10 +64,11 @@ public class Panel extends JPanel {
     }
 
     @Override
+
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         for (int i = 0; i < balls.size(); i++) {
-            balls.get(i).paint(g);
+            balls.get(i).paintComponent(g);
         }
     }
 
@@ -72,14 +77,7 @@ public class Panel extends JPanel {
             try {
                 //GRAVEDAD RESPECTO AL SUELO O AL RATON
                 if (mouseMode) {
-                    Point b = MouseInfo.getPointerInfo().getLocation();
-                    SwingUtilities.convertPointFromScreen(b, this); //PUNTO B RESPECTIVO A LA VENTANA Y NO A LA PANTALLA
-                    Double mouseX = (double) b.getX() - (Ball.radius / 2);
-                    Double mouseY = (double) b.getY() - (Ball.radius / 2);
-                    Vector Mouse = new Vector(mouseX, mouseY);
-                    Vector uniMouse = (Vector.Sub(Mouse, balls.get(i).getPosition()).Uni());
-                    uniMouse.EMultVector(G.module());
-                    balls.get(i).setAcceleration(uniMouse);
+                    balls.get(i).setAcceleration(MouseVector(i));
                 } else {
                     balls.get(i).setAcceleration(G);
                 }
@@ -88,12 +86,24 @@ public class Panel extends JPanel {
             }
 
             balls.get(i).move();
+            //INTERACCIÓN DE REBOTAR O ATRAVESAR
             if (wallMode) {
                 balls.get(i).rebound();
             } else {
                 balls.get(i).tp();
             }
         }
+    }
+
+    public Vector MouseVector(int i) {
+        Point b = MouseInfo.getPointerInfo().getLocation();
+        SwingUtilities.convertPointFromScreen(b, this); //PUNTO B RESPECTIVO A LA VENTANA Y NO A LA PANTALLA
+        Double mouseX = (double) b.getX() - (Ball.radius / 2);
+        Double mouseY = (double) b.getY() - (Ball.radius / 2);
+        Vector Mouse = new Vector(mouseX, mouseY);
+        Vector uniMouse = (Vector.Sub(Mouse, balls.get(i).getPosition()).Uni());
+        uniMouse.EMultVector(G.module());
+        return uniMouse;
     }
 
     public void setArrayLength(Integer arrayLength) {
