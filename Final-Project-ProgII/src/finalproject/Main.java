@@ -1,5 +1,6 @@
 /*
  * Ruben Palmer Perez
+ * https://youtu.be/w-rqj5lVAgA
  * Clase principal del programa
  */
 package finalproject;
@@ -15,7 +16,7 @@ import javax.swing.JTextField;
  * @author Zygmut
  */
 public class Main extends JFrame {
-    
+
     static Panel panel;
     private javax.swing.JCheckBox setWalls;
     private javax.swing.JCheckBox followMouse;
