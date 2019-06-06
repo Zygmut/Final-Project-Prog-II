@@ -1,6 +1,5 @@
 /*
  * Ruben Palmer Perez
- * https://youtu.be/w-rqj5lVAgA
  * Gestion y definicion de bola
  */
 package finalproject;
@@ -19,10 +18,10 @@ import java.util.Random;
 public class Ball {
 
     private static final Vector Terminal = new Vector(2.0, 2.0);
+    public final static Integer radius = 45;
     private Vector position;
     private Vector velocity;
     private Vector acceleration;
-    public final static Integer radius = 45;
     private final Color color;
     private Ellipse2D shape;
 
@@ -56,7 +55,7 @@ public class Ball {
             velocity.vector[0] *= -1;
         }
         //REBOTE VERTICAL
-        if ((position.vector[1] < 0) || (position.vector[1] > (Panel.Height - Ball.radius))) {
+        if ((position.vector[1] < 0) || (position.vector[1] > (Panel.Height - Ball.radius)-20)) {
             velocity.vector[1] *= -1;
         }
     }

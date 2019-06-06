@@ -1,11 +1,13 @@
 /*
  * Ruben Palmer Perez
- * https://youtu.be/w-rqj5lVAgA
  * Clase principal del programa
  */
 package finalproject;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,14 +20,19 @@ import javax.swing.JTextField;
 public class Main extends JFrame {
 
     static Panel panel;
-    private javax.swing.JCheckBox setWalls;
-    private javax.swing.JCheckBox followMouse;
-    private javax.swing.JTextField ballNumber;
-    private javax.swing.JLabel ballLabel;
+    private JCheckBox setWalls;
+    private JCheckBox followMouse;
+    private JTextField ballNumber;
+    private JLabel ballLabel;
 
     public Main() {
-        super("Final Project");
-        this.setDefaultCloseOperation(Main.EXIT_ON_CLOSE);
+        this.setTitle("Flying Balls");
+        this.setSize(1230, 759);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setLayout(null);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.lightGray);
         initcomponents();
     }
 
@@ -36,11 +43,14 @@ public class Main extends JFrame {
         ballNumber = new JTextField("2");
         ballLabel = new JLabel("# Balls");
 
-        ballNumber.setFont(new java.awt.Font("Dialog", 0, 24));
-        ballNumber.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        ballNumber.addActionListener(new java.awt.event.ActionListener() {
+        panel.setBounds(0, 0, 1036, 759);
+
+        ballNumber.setBounds(1054, 276, 124, 53);
+        ballNumber.setFont(new Font("Dialog", 0, 24));
+        ballNumber.setHorizontalAlignment(JTextField.RIGHT);
+        ballNumber.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt) {
                 ballNumberActionPerformed(evt);
             }
 
@@ -50,11 +60,10 @@ public class Main extends JFrame {
              *
              * @param evt
              */
-            private void ballNumberActionPerformed(java.awt.event.ActionEvent evt) {
+            private void ballNumberActionPerformed(ActionEvent evt) {
                 String text = ballNumber.getText();
                 Integer num = 0;
                 boolean numeric = true;
-
                 try {
                     num = Integer.parseInt(text);
                 } catch (NumberFormatException e) {
@@ -67,11 +76,13 @@ public class Main extends JFrame {
             }
 
         });
+
+        setWalls.setBounds(1054, 347, 111, 42);
         setWalls.setBackground(Color.lightGray);
-        setWalls.setFont(new java.awt.Font("Dialog", 0, 16));
-        setWalls.addActionListener(new java.awt.event.ActionListener() {
+        setWalls.setFont(new Font("Dialog", 0, 16));
+        setWalls.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt) {
                 setWallsActionPerformed(evt);
             }
 
@@ -80,15 +91,18 @@ public class Main extends JFrame {
              *
              * @param evt
              */
-            private void setWallsActionPerformed(java.awt.event.ActionEvent evt) {
+            private void setWallsActionPerformed(ActionEvent evt) {
                 panel.setWallMode(setWalls.isSelected());
+
             }
         });
+
+        followMouse.setBounds(1054, 389, 124, 50);
         followMouse.setBackground(Color.lightGray);
-        followMouse.setFont(new java.awt.Font("Dialog", 0, 16));
-        followMouse.addActionListener(new java.awt.event.ActionListener() {
+        followMouse.setFont(new Font("Dialog", 0, 16));
+        followMouse.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt) {
                 followMouseActionPerformed(evt);
             }
 
@@ -97,66 +111,19 @@ public class Main extends JFrame {
              *
              * @param evt
              */
-            private void followMouseActionPerformed(java.awt.event.ActionEvent evt) {
+            private void followMouseActionPerformed(ActionEvent evt) {
                 panel.setMouseMode(followMouse.isSelected());
             }
         });
 
-        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
-        panel.setLayout(panelLayout);
-        panelLayout.setHorizontalGroup(
-                panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 1036, Short.MAX_VALUE)
-        );
-        panelLayout.setVerticalGroup(
-                panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 765, Short.MAX_VALUE)
-        );
+        ballLabel.setBounds(1075, 246, 54, 24);
+        ballLabel.setFont(new Font("Dialog", 0, 18));
 
-        ballLabel.setFont(new java.awt.Font("Dialog", 0, 18));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(followMouse)
-                                                                        .addComponent(setWalls, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                                .addGap(0, 0, Short.MAX_VALUE)
-                                                                .addComponent(ballNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(46, 46, 46))))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(39, 39, 39)
-                                                .addComponent(ballLabel)
-                                                .addGap(0, 0, Short.MAX_VALUE))))
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(246, 246, 246)
-                                .addComponent(ballLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ballNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(setWalls, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(followMouse, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        getContentPane().setBackground(Color.lightGray);
-        setResizable(false);
-        pack();
-        setLocationRelativeTo(null);
+        this.getContentPane().add(panel);
+        this.getContentPane().add(ballLabel);
+        this.getContentPane().add(ballNumber);
+        this.getContentPane().add(followMouse);
+        this.getContentPane().add(setWalls);
     }
 
     /**

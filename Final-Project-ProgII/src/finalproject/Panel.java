@@ -1,6 +1,5 @@
 /*
  * Ruben Palmer Perez
- * https://youtu.be/w-rqj5lVAgA
  * Gestion y definicion del panel en el que se enuentra la simulacion
  */
 package finalproject;
@@ -45,7 +44,7 @@ public class Panel extends JPanel {
         Double xpos, ypos;
         for (int i = 0; i < arrayLength; i++) {
             xpos = (double) Math.random() * (Width - Ball.radius);
-            ypos = (double) Math.random() * (Height - Ball.radius);
+            ypos = (double) Math.random() * (Height - Ball.radius - 20);
             Ball aux = new Ball(xpos, ypos);
             balls.add(aux);
         }

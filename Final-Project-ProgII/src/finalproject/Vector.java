@@ -1,6 +1,5 @@
 /*
  * Ruben Palmer Perez
- * https://youtu.be/w-rqj5lVAgA
  * Gestion y definicion de vector
  */
 package finalproject;
@@ -81,7 +80,6 @@ public class Vector {
      * @param Vx
      */
     public void AddVector(Vector Vx) {
-
         for (int i = 0; i < vector.length; i++) {
             vector[i] += Vx.vector[i];
         }
@@ -133,8 +131,8 @@ public class Vector {
     }
 
     /**
-     * Permite multiplicar cad uan de las componentes de un vector por un valor
-     * escalar "y
+     * Permite multiplicar cada una de las componentes de un vector por un valor
+     * escalar "y"
      *
      * @param y
      */
@@ -145,7 +143,7 @@ public class Vector {
     }
 
     /**
-     * Version estatica de EMultVector: Permite multiplicar cad uan de las
+     * Version estatica de EMultVector: Permite multiplicar cada una de las
      * componentes de un vector por un valor escalar "y"
      *
      * @param Vx
@@ -215,36 +213,6 @@ public class Vector {
             z.vector[i] = Vx.vector[i] / mod;
         }
         return z;
-    }
-
-    /**
-     * Devuelve el producto escalar entre el vector y un vector "Vx"pasado por
-     * parametro
-     *
-     * @param Vx
-     * @return sum
-     */
-    public Double EscVector(Vector Vx) {
-        Double sum = 0.00;
-        for (int i = 0; i < vector.length; i++) {
-            sum += vector[i] * Vx.vector[i];
-        }
-        return sum;
-    }
-
-    /**
-     * Devuelve el producto escalar entre el vector "Vx" y un vector "Vy"
-     *
-     * @param Vx
-     * @param Vy
-     * @return sum
-     */
-    public static Double EscVector(Vector Vx, Vector Vy) {
-        Double sum = 0.00;
-        for (int i = 0; i < Vx.getDim(); i++) {
-            sum += Vx.vector[i] * Vy.vector[i];
-        }
-        return sum;
     }
 
     /**
