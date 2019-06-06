@@ -1,5 +1,6 @@
 /*
  * Ruben Palmer Perez
+ * https://youtu.be/FwxqV6xkMiM
  * Gestion y definicion de vector
  */
 package finalproject;
